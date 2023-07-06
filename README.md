@@ -1,24 +1,22 @@
-# README
+# Status App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Displays information on running system
 
-Things you may want to cover:
+- Ruby version
+- Rails version
+- Rails environment
 
-* Ruby version
+- Memory
+- CPU
+- Network adapters
+- Hostname
+- nginx version
+- passenger version
+- timedatectl info
+- rvm info
 
-* System dependencies
+- All environment variables
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Use cases
+- Used as a test deploy to new servers for checking the build of server images.
+- Used as a test deploy within a cluster of containers, to verify automated cluster generation.
