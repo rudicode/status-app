@@ -28,4 +28,5 @@
   <code class="key"><%= key %> = </code><code class="value"><%= ENV[key] %></code><br>
 <% end %>
 <br>
-<code class="numbers">Finished Status: <%= Time.current %> [<%= Time.current.zone %>]</code>
+<code class="numbers">Finished Status: <%= Time.current %> [<%= Time.current.zone %>]</code><br>
+<code class="numbers">Total time to gather all information: <%= number_with_precision(@total_time, precision: 5, delimiter: ',') %>s</code>

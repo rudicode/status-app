@@ -12,6 +12,7 @@ class StatusController < ApplicationController
   end
 
   def index
+    start_time = Time.current
     @system = {}
     @system[:pwd] = sys('pwd')
     @system[:processors_available] = sys('nproc')
@@ -31,5 +32,6 @@ class StatusController < ApplicationController
     @system[:passenger_version] = sys('passenger -v')
     @system[:timedatectl] = sys('timedatectl')
     @system[:RVM_INFO] = sys('rvm info')
+    @total_time = Time.current - start_time
   end
 end
