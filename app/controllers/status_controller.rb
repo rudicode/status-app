@@ -1,11 +1,12 @@
 class StatusController < ApplicationController
   def sys command
     begin
-      output = `#{command}`
+      output = `#{command}`.chomp
+      raise Errno::ENOENT if $?.exitstatus > 0 # on any error
     rescue Errno::ENOENT
-      puts "sys() Command not found: #{command}"
-      Rails.logger.warn "WARN: #{controller_name}##{action_name}#sys() Command not found: #{command}"
-      output = "Error: command not found: \"#{command}\""
+      puts "sys() Error command: #{command}"
+      Rails.logger.warn "WARN: #{controller_name}##{action_name}#sys() Error command: #{command}"
+      output = "Error command: \"#{command}\""
     end
     output
   end
@@ -26,7 +27,7 @@ class StatusController < ApplicationController
     @system[:lsb_release_description] = sys('lsb_release -s -d').chomp
     @system[:lsb_release_release] = sys('lsb_release -s -r')
     @system[:lsb_release_codename] = sys('lsb_release -s -c')
-    @system[:nginx_version] = sys('nginx -v')
+    @system[:nginx_version] = sys('nginx -v 2>&1') # nginx outputs to stderr and we need to redirect it to stdout
     @system[:passenger_version] = sys('passenger -v')
     @system[:timedatectl] = sys('timedatectl')
     @system[:RVM_INFO] = sys('rvm info')
