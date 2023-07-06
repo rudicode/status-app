@@ -1,0 +1,31 @@
+<h1>Status App Cyclops-Rails V0.1</h1>
+<h2>Ruby on Rails Info</h2>
+<code class="rails-key">Rails version:</code> <code class="rails-value"><%= Rails.version %></code><br>
+<code class="rails-key">Ruby version:</code> <code class="rails-value"><%= RUBY_DESCRIPTION %></code><br>
+<code class="rails-key">Rails Environment:</code> <code class="rails-value"><%= ENV['RAILS_ENV'] %></code><br>
+<h2>System info</h2>
+<% @system.keys.each do |key| %>
+  <% if @system[key].is_a? Integer %>
+    <code class="key"><%= key %> = </code><code class="numbers"><%= number_with_precision(@system[key], precision: 0, delimiter: ',') %> MB</code><br>
+  <% elsif @system[key].is_a? String %>
+    <% lines = @system[key].split("\n") %>
+    <% if lines.count > 1 %>
+      <code class="key"><%= key %> =</code><br>
+      <% lines.each do |line| %>
+        <code class="value"><%= line %></code><br>
+      <% end %>
+    <% else %>  
+      <code class="key"><%= key %> = </code><code class="value"><%= @system[key] %></code><br>
+    <% end %>
+    
+  <% else %>
+    <code class="key"><%= key %> = </code><code class="value"><%= @system[key] %></code><br>
+  <% end %>
+<% end %>
+
+<h2><code>ENV[]</code> - All Environment Variables</h2>
+<% ENV.keys.each do |key| %>
+  <code class="key"><%= key %> = </code><code class="value"><%= ENV[key] %></code><br>
+<% end %>
+<br>
+<code class="numbers">Finished Status: <%= Time.current %> [<%= Time.current.zone %>]</code>
