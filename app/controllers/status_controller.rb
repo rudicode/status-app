@@ -34,7 +34,7 @@ class StatusController < ApplicationController
     # need sudo because passenger-status use passenger_system_ruby, which is differnt from the ruby in the Gemfile
     # therfore the rails app does not run it.
     # NOTE this only happens when running from inside the rails app
-    @system[:passenger_status] = sys('suso passenger-status')
+    @system[:passenger_status] = sys('sudo passenger-status')
     @system[:timedatectl] = sys('timedatectl')
     @system[:RVM_INFO] = sys('rvm info')
     @total_time = Time.current - start_time
