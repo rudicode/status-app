@@ -25,11 +25,13 @@ class StatusController < ApplicationController
       @system["addapter__#{adapter}"] = ip
     end
     @system[:hostname] = sys('hostname')
+    @system[:hostname_ip] = sys('hostname -I')
     @system[:lsb_release_description] = sys('lsb_release -s -d').chomp
     @system[:lsb_release_release] = sys('lsb_release -s -r')
     @system[:lsb_release_codename] = sys('lsb_release -s -c')
     @system[:nginx_version] = sys('nginx -v 2>&1') # nginx outputs to stderr and we need to redirect it to stdout
     @system[:passenger_version] = sys('passenger -v')
+    @system[:passenger_status] = sys('passenger-status')
     @system[:timedatectl] = sys('timedatectl')
     @system[:RVM_INFO] = sys('rvm info')
     @total_time = Time.current - start_time
